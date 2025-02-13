@@ -21,7 +21,7 @@ const LoginPage: FC = () => {
     if (res?.error) {
       alert("Invalid email or password");
     } else {
-      router.push("/");
+      router.push("/browse");
     }
   };
 
