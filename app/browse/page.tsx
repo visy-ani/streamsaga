@@ -2,26 +2,48 @@
 
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 const BrowsePage = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/login");
+      router.replace("/login");
     }
   }, [status, router]);
 
-  if (status === "loading") return <p>Loading...</p>;
+  const handleSignOut = async () => {
+    try {
+      await signOut({ callbackUrl: "/login" });
+    } catch (err) {
+      setError("Failed to sign out. Please try again." + err);
+    }
+  };
+
+  const userInfo = useMemo(() => session?.user, [session]);
+
   return (
     <div>
-      <h1>Browse Our Library</h1>
-      <p>Welcome, {session?.user?.name || session?.user?.email}</p>
-      <button onClick={() => signOut({ callbackUrl: "/login" })}>
-        Log Out
-      </button>
+      {status === "loading" ? (
+        <p>Loading...</p>
+      ) : userInfo ? (
+        <div>
+          <h1>
+            Welcome, {userInfo.name || userInfo.email}
+          </h1>
+          <button
+            onClick={handleSignOut}
+          >
+            Sign Out
+          </button>
+        </div>
+      ) : (
+        <p>Redirecting to login...</p>
+      )}
+      {error && <p>{error}</p>}
     </div>
   );
 };
