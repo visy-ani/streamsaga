@@ -1,3 +1,45 @@
+/*=========== 
+Global-Error 
+===========*/
+.error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8d7da;
+  color: #721c24;
+  text-align: center;
+}
+
+.error-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.error-message {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.error-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #721c24;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.error-button:hover {
+  background-color: #5a1216;
+}
+
+
+/*=========== 
+Error 
+===========*/
 .error-page-container {
     display: flex;
     flex-direction: column;

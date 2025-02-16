@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { logError } from "@/utils/logging";
+import { logError } from "@/middleware/logging";
+import '@/styles/globals.css';
 
 const ErrorPage = ({ error, reset }: { error: Error; reset: () => void }) => {
     useEffect(() => {
@@ -16,7 +17,7 @@ const ErrorPage = ({ error, reset }: { error: Error; reset: () => void }) => {
       <div className="error-page-container">
         <h2 className="error-message-header">Oops! Something went wrong.</h2>
         <p className="error-message-details">{error.message || "An unexpected error occurred."}</p>
-        <button className="error-reset-button" onClick={handleReset}>
+        <button className="error-reset-button"onClick={handleReset}>
           Try Again
         </button>
       </div>
