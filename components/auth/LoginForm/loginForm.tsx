@@ -5,6 +5,7 @@ import { FaGoogle, FaGithub, FaFacebook } from "react-icons/fa";
 import useLoginForm from "@/hooks/useLoginForm";
 import FormInput from "@/components/ui/FormInput/FormInput";
 import styles from "./LoginForm.module.css";
+import Link from "next/link";
 
 const LoginForm: FC = () => {
   const { form, handleInputChange, handleSubmit, loading, error, success } = useLoginForm();
@@ -103,7 +104,7 @@ const LoginForm: FC = () => {
         </form>
         
         <div className={styles.registerLink}>
-          Don&apos;t have an account? <a href="/register">Sign up</a>
+          Don&apos;t have an account? <Link href="/auth/signup">Sign up</Link>
         </div>
       </div>
     </div>
