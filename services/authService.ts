@@ -1,4 +1,5 @@
 import axios from "axios";
+import { signIn } from "next-auth/react";
 
 interface SignupData {
   name: string;
@@ -24,3 +25,39 @@ export const signupUser = async (signupData: SignupData) => {
     }
   }
 };
+
+
+//Login
+interface LoginData {
+  email: string;
+  password: string;
+}
+
+export const loginUser = async (loginData: LoginData) => {
+  try {
+    const result = await signIn("credentials", {
+      redirect: false,
+      email: loginData.email,
+      password: loginData.password,
+    });
+
+    if (result?.error) {
+      return {
+        success: false,
+        message: result.error || "Login failed. Please try again.",
+      };
+    }
+    
+    return {
+      success: true,
+      message: "Login successful.",
+    };
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : "An error occurred. Please try again.";
+    return {
+      success: false,
+      message: errorMessage || "An unexpected error occurred. Please try again.",
+    };
+  }
+};
+

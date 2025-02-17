@@ -39,7 +39,7 @@ const useSignupForm = () => {
                return;
             }
             setSuccess("User registered Successfully");
-            router.push("/login");
+            router.push("/auth/login");
         } catch (err) {
             const errorMessage = err instanceof Error ? err.message : "An error occurred. Please try again.";
             setError(errorMessage);

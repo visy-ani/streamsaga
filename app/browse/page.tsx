@@ -11,13 +11,13 @@ const BrowsePage = () => {
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.replace("/login");
+      router.replace("/auth/login");
     }
   }, [status, router]);
 
   const handleSignOut = async () => {
     try {
-      await signOut({ callbackUrl: "/login" });
+      await signOut({ callbackUrl: "/auth/login" });
     } catch (err) {
       setError("Failed to sign out. Please try again." + err);
     }

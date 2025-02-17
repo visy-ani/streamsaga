@@ -11,7 +11,7 @@ const HomePage: FC = () => {
   }
 
   const handleLogin = () => {
-    router.push("/login")
+    router.push("/auth/login")
   }
   
   return (

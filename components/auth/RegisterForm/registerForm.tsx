@@ -5,8 +5,7 @@ import useSignupForm from "@/hooks/useSignupForm";
 import FormInput from "@/components/ui/FormInput/FormInput";
 
 const RegisterForm: FC = () => {
-    const { form, handleInputChange, handleSubmit, loading, error, success } =
-        useSignupForm();
+    const { form, handleInputChange, handleSubmit, loading, error, success } = useSignupForm();
 
     return (
         <div>
