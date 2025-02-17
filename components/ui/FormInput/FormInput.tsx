@@ -6,6 +6,8 @@ interface FormInputProps {
   placeholder: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className: string;
+  required: boolean;
 }
 
 const FormInput: FC<FormInputProps> = ({
@@ -14,6 +16,8 @@ const FormInput: FC<FormInputProps> = ({
   placeholder,
   value,
   onChange,
+  className,
+  required,
 }) => {
   return (
     <input
@@ -22,6 +26,8 @@ const FormInput: FC<FormInputProps> = ({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      className={className}
+      required={required}
     />
   );
 };
