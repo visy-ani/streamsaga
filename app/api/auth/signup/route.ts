@@ -9,7 +9,7 @@ export async function POST(request: Request){
     // check for null fields
     if(!name || !email || !password ){
         return NextResponse.json(
-            { message: "Name, email, and password are required."},
+            { success: false, message: "Name, email, and password are required."},
             { status: 400 }
         );
     }
@@ -18,7 +18,7 @@ export async function POST(request: Request){
     const existingUser = await prisma.user.findUnique({ where: {email}});
     if( existingUser ){
         return NextResponse.json(
-            { message: "User already exists." },
+            { success: false, message: "User already exists." },
             { status: 400 }
         );
     }
@@ -36,7 +36,7 @@ export async function POST(request: Request){
     });
 
     return NextResponse.json(
-        { message: "User created successfully", user: newUser },
+        { success: true, message: "User created successfully", user: newUser },
         { status: 201 }
     );
 }
