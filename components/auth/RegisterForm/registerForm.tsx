@@ -3,16 +3,11 @@
 import { FC } from "react";
 import useSignupForm from "@/hooks/useSignupForm";
 import FormInput from "@/components/ui/FormInput/FormInput";
-import { FaGoogle, FaGithub, FaFacebook } from "react-icons/fa";
 import styles from "./RegisterForm.module.css";
 import Link from "next/link";
 
 const RegisterForm: FC = () => {
   const { form, handleInputChange, handleSubmit, loading, error, success } = useSignupForm();
-
-  const handleSocialSignup = (provider: string) => {
-    console.log(`Signing up with ${provider}`);
-  };
 
   return (
     <div className={styles.container}>
@@ -76,35 +71,6 @@ const RegisterForm: FC = () => {
             ) : "Start Membership"}
           </button>
         </form>
-        
-        <div className={styles.divider}>
-          <span>or continue with</span>
-        </div>
-        
-        {/* Social signup buttons */}
-        <div className={styles.socialButtonsContainer}>
-          <button 
-            type="button"
-            onClick={() => handleSocialSignup('Google')} 
-            className={`${styles.socialButton} ${styles.googleButton}`}
-          >
-            <FaGoogle /> <span>Google</span>
-          </button>
-          <button 
-            type="button"
-            onClick={() => handleSocialSignup('GitHub')} 
-            className={`${styles.socialButton} ${styles.githubButton}`}
-          >
-            <FaGithub /> <span>GitHub</span>
-          </button>
-          <button 
-            type="button"
-            onClick={() => handleSocialSignup('Facebook')} 
-            className={`${styles.socialButton} ${styles.facebookButton}`}
-          >
-            <FaFacebook /> <span>Facebook</span>
-          </button>
-        </div>
         
         <p className={styles.termsText}>
           By signing up, you agree to our <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>
