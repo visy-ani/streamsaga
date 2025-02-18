@@ -8,47 +8,17 @@ import styles from "./LoginForm.module.css";
 import Link from "next/link";
 
 const LoginForm: FC = () => {
-  const { form, handleInputChange, handleSubmit, loading, error, success } = useLoginForm();
-
-  const handleSocialLogin = (provider: string) => {
-    console.log(`Logging in with ${provider}`);
-  };
+  const { form, handleInputChange, handleSubmit, handleSocialLogin, loading, error, success } = useLoginForm();
 
   return (
     <div className={styles.container}>
+      <div className={styles.backgroundOverlay}></div>
       <div className={styles.formWrapper}>
-        <h1 className={styles.title}>Welcome Back</h1>
+        <h1 className={styles.title}>Login</h1>
         
-        {/* Social login buttons */}
-        <div className={styles.socialButtonsContainer}>
-          <button 
-            type="button"
-            onClick={() => handleSocialLogin('Google')} 
-            className={`${styles.socialButton} ${styles.googleButton}`}
-          >
-            <FaGoogle /> Login with Google
-          </button>
-          <button 
-            type="button"
-            onClick={() => handleSocialLogin('GitHub')} 
-            className={`${styles.socialButton} ${styles.githubButton}`}
-          >
-            <FaGithub /> Login with GitHub
-          </button>
-          <button 
-            type="button"
-            onClick={() => handleSocialLogin('Facebook')} 
-            className={`${styles.socialButton} ${styles.facebookButton}`}
-          >
-            <FaFacebook /> Login with Facebook
-          </button>
-        </div>
+        {error && <div className={styles.errorMessage}>{error}</div>}
+        {success && <div className={styles.successMessage}>{success}</div>}
         
-        <div className={styles.divider}>
-          <span>or login with email</span>
-        </div>
-        
-        {/* Login form using your existing hook */}
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputGroup}>
             <FormInput
@@ -87,9 +57,6 @@ const LoginForm: FC = () => {
             <a href="/forgot-password" className={styles.forgotPassword}>Forgot password?</a>
           </div>
 
-          {error && <div className={styles.errorMessage}>{error}</div>}
-          {success && <div className={styles.successMessage}>{success}</div>}
-
           <button 
             type="submit" 
             disabled={loading} 
@@ -99,12 +66,41 @@ const LoginForm: FC = () => {
               <span className={styles.loadingSpinner}>
                 <span className={styles.spinnerDot}></span>
               </span>
-            ) : "Log In"}
+            ) : "Sign In"}
           </button>
         </form>
         
+        <div className={styles.divider}>
+          <span>or continue with</span>
+        </div>
+        
+        {/* Social login buttons */}
+        <div className={styles.socialButtonsContainer}>
+          <button 
+            type="button"
+            onClick={() => handleSocialLogin('google')} 
+            className={`${styles.socialButton} ${styles.googleButton}`}
+          >
+            <FaGoogle /> <span>Google</span>
+          </button>
+          <button 
+            type="button"
+            onClick={() => handleSocialLogin('gitHub')} 
+            className={`${styles.socialButton} ${styles.githubButton}`}
+          >
+            <FaGithub /> <span>GitHub</span>
+          </button>
+          <button 
+            type="button"
+            onClick={() => handleSocialLogin('facebook')} 
+            className={`${styles.socialButton} ${styles.facebookButton}`}
+          >
+            <FaFacebook /> <span>Facebook</span>
+          </button>
+        </div>
+        
         <div className={styles.registerLink}>
-          Don&apos;t have an account? <Link href="/auth/signup">Sign up</Link>
+          New to Stream Saga? <Link href="/auth/signup">Sign up now</Link>
         </div>
       </div>
     </div>

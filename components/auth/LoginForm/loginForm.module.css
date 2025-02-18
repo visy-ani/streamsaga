@@ -1,32 +1,282 @@
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 2rem;
-    background-color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background: #0a0a0a;
+  position: relative;
+  color: #f9fafb;
+}
+
+.backgroundOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+  z-index: 1;
+}
+
+.formWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  padding: 3rem 2.5rem;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  width: 100%;
+  padding: 1rem;
+  background-color: #333;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.input::placeholder {
+  color: #aaa;
+}
+
+.input:focus {
+  background-color: #454545;
+  outline: none;
+}
+
+.formOptions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.rememberMe {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rememberMe input[type="checkbox"] {
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  background-color: #333;
+  border-radius: 0.15rem;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+}
+
+.rememberMe input[type="checkbox"]:checked {
+  background-color: #e50914;
+}
+
+.rememberMe input[type="checkbox"]:checked::after {
+  content: "✓";
+  font-size: 0.75rem;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.rememberMe label {
+  color: #aaa;
+  cursor: pointer;
+}
+
+.forgotPassword {
+  color: #aaa;
+  text-decoration: none;
+}
+
+.forgotPassword:hover {
+  text-decoration: underline;
+  color: white;
+}
+
+.divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #333;
+}
+
+.divider span {
+  padding: 0 1rem;
+  font-size: 0.875rem;
+  color: #aaa;
+}
+
+.socialButtonsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.socialButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  font-size: 1.25rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  color: white;
+  background-color: transparent;
+  border: 1px solid #333;
+}
+
+.socialButton span {
+  display: none;
+}
+
+.googleButton:hover {
+  background-color: rgba(219, 68, 55, 0.1);
+  border-color: #db4437;
+}
+
+.githubButton:hover {
+  background-color: rgba(36, 41, 46, 0.1);
+  border-color: #24292e;
+}
+
+.facebookButton:hover {
+  background-color: rgba(24, 119, 242, 0.1);
+  border-color: #1877f2;
+}
+
+.errorMessage {
+  padding: 0.75rem;
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.successMessage {
+  padding: 0.75rem;
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 1rem;
+  background-color: #e50914;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.submitButton:hover {
+  background-color: #f40612;
+}
+
+.submitButton:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.loadingSpinner {
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.spinnerDot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0.2rem solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spinner 1s linear infinite;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
   }
-  
-  .formWrapper {
-    width: 100%;
-    max-width: 480px;
-    padding: 2.5rem;
-    background-color: white;
-    border-radius: 0.75rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  }
-  
-  .title {
-    font-size: 1.875rem;
-    font-weight: 700;
-    text-align: center;
-    color: #111827;
-    margin-bottom: 2rem;
-  }
-  
+}
+
+.registerLink {
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: #aaa;
+  text-align: center;
+}
+
+.registerLink a {
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+  margin-left: 0.25rem;
+}
+
+.registerLink a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 640px) {
   .socialButtonsContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     gap: 0.75rem;
     margin-bottom: 1.5rem;
   }
@@ -35,222 +285,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    width: 100%;
+    width: auto;
+    height: auto;
+    gap: 0.5rem;
     padding: 0.75rem 1rem;
     font-size: 1rem;
-    font-weight: 500;
-    border-radius: 0.375rem;
-    transition: all 0.2s ease;
-    cursor: pointer;
-  }
-  
-  .googleButton {
-    background-color: white;
-    color: #4b5563;
-    border: 1px solid #e5e7eb;
-  }
-  
-  .googleButton:hover {
-    background-color: #f9fafb;
-  }
-  
-  .githubButton {
-    background-color: #24292e;
-    color: white;
-    border: none;
-  }
-  
-  .githubButton:hover {
-    background-color: #1b1f23;
-  }
-  
-  .facebookButton {
-    background-color: #1877f2;
-    color: white;
-    border: none;
-  }
-  
-  .facebookButton:hover {
-    background-color: #166fe5;
-  }
-  
-  .divider {
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin: 1.5rem 0;
-  }
-  
-  .divider::before,
-  .divider::after {
-    content: "";
-    flex: 1;
-    border-bottom: 1px solid #e5e7eb;
-  }
-  
-  .divider span {
-    padding: 0 1rem;
-    font-size: 0.875rem;
-    color: #6b7280;
-  }
-  
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-  
-  .inputGroup {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.375rem;
-    font-size: 1rem;
-    transition: border-color 0.2s ease;
-  }
-  
-  .input:focus {
-    border-color: #3b82f6;
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
-  }
-  
-  .formOptions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.875rem;
-  }
-  
-  .rememberMe {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .rememberMe input[type="checkbox"] {
-    appearance: none;
-    width: 1rem;
-    height: 1rem;
-    border: 1px solid #d1d5db;
     border-radius: 0.25rem;
-    position: relative;
-    cursor: pointer;
+    flex: 1;
   }
   
-  .rememberMe input[type="checkbox"]:checked {
-    background-color: #4f46e5;
-    border-color: #4f46e5;
+  .socialButton span {
+    display: inline;
+  }
+}
+
+@media (max-width: 640px) {
+  .formWrapper {
+    padding: 2rem 1.5rem;
   }
   
-  .rememberMe input[type="checkbox"]:checked::after {
-    content: "✓";
-    font-size: 0.75rem;
-    color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  .title {
+    font-size: 1.75rem;
   }
-  
-  .rememberMe label {
-    color: #4b5563;
-    cursor: pointer;
-  }
-  
-  .forgotPassword {
-    color: #4f46e5;
-    text-decoration: none;
-  }
-  
-  .forgotPassword:hover {
-    text-decoration: underline;
-  }
-  
-  .errorMessage {
-    padding: 0.75rem;
-    background-color: #fee2e2;
-    color: #b91c1c;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-  }
-  
-  .successMessage {
-    padding: 0.75rem;
-    background-color: #dcfce7;
-    color: #166534;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-  }
-  
-  .submitButton {
-    width: 100%;
-    padding: 0.875rem;
-    background-color: #4f46e5;
-    color: white;
-    font-size: 1rem;
-    font-weight: 500;
-    border: none;
-    border-radius: 0.375rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .submitButton:hover {
-    background-color: #4338ca;
-  }
-  
-  .submitButton:disabled {
-    background-color: #9ca3af;
-    cursor: not-allowed;
-  }
-  
-  .loadingSpinner {
-    position: relative;
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-  
-  .spinnerDot {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0.2rem solid rgba(255, 255, 255, 0.3);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spinner 1s linear infinite;
-  }
-  
-  @keyframes spinner {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
-  .registerLink {
-    margin-top: 1.5rem;
-    font-size: 0.875rem;
-    color: #6b7280;
-    text-align: center;
-  }
-  
-  .registerLink a {
-    color: #4f46e5;
-    font-weight: 500;
-    text-decoration: none;
-  }
-  
-  .registerLink a:hover {
-    text-decoration: underline;
-  }
+}

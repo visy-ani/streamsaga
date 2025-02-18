@@ -16,37 +16,12 @@ const RegisterForm: FC = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.backgroundOverlay}></div>
       <div className={styles.formWrapper}>
-        <h1 className={styles.title}>Create an Account</h1>
+        <h1 className={styles.title}>Create Your Account</h1>
         
-        {/* Social login buttons */}
-        <div className={styles.socialButtonsContainer}>
-          <button 
-            type="button"
-            onClick={() => handleSocialSignup('Google')} 
-            className={`${styles.socialButton} ${styles.googleButton}`}
-          >
-            <FaGoogle /> Continue with Google
-          </button>
-          <button 
-            type="button"
-            onClick={() => handleSocialSignup('GitHub')} 
-            className={`${styles.socialButton} ${styles.githubButton}`}
-          >
-            <FaGithub /> Continue with GitHub
-          </button>
-          <button 
-            type="button"
-            onClick={() => handleSocialSignup('Facebook')} 
-            className={`${styles.socialButton} ${styles.facebookButton}`}
-          >
-            <FaFacebook /> Continue with Facebook
-          </button>
-        </div>
-        
-        <div className={styles.divider}>
-          <span>or register with email</span>
-        </div>
+        {error && <div className={styles.errorMessage}>{error}</div>}
+        {success && <div className={styles.successMessage}>{success}</div>}
         
         {/* Registration form */}
         <form onSubmit={handleSubmit} className={styles.form}>
@@ -89,9 +64,6 @@ const RegisterForm: FC = () => {
             </p>
           </div>
 
-          {error && <div className={styles.errorMessage}>{error}</div>}
-          {success && <div className={styles.successMessage}>{success}</div>}
-
           <button 
             type="submit" 
             disabled={loading} 
@@ -101,16 +73,45 @@ const RegisterForm: FC = () => {
               <span className={styles.loadingSpinner}>
                 <span className={styles.spinnerDot}></span>
               </span>
-            ) : "Create Account"}
+            ) : "Start Membership"}
           </button>
         </form>
+        
+        <div className={styles.divider}>
+          <span>or continue with</span>
+        </div>
+        
+        {/* Social signup buttons */}
+        <div className={styles.socialButtonsContainer}>
+          <button 
+            type="button"
+            onClick={() => handleSocialSignup('Google')} 
+            className={`${styles.socialButton} ${styles.googleButton}`}
+          >
+            <FaGoogle /> <span>Google</span>
+          </button>
+          <button 
+            type="button"
+            onClick={() => handleSocialSignup('GitHub')} 
+            className={`${styles.socialButton} ${styles.githubButton}`}
+          >
+            <FaGithub /> <span>GitHub</span>
+          </button>
+          <button 
+            type="button"
+            onClick={() => handleSocialSignup('Facebook')} 
+            className={`${styles.socialButton} ${styles.facebookButton}`}
+          >
+            <FaFacebook /> <span>Facebook</span>
+          </button>
+        </div>
         
         <p className={styles.termsText}>
           By signing up, you agree to our <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>
         </p>
         
         <div className={styles.loginLink}>
-          Already have an account? <Link href="/auth/login">Login</Link>
+          Already have an account? <Link href="/auth/login">Sign In</Link>
         </div>
       </div>
     </div>

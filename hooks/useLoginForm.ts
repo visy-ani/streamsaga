@@ -50,7 +50,12 @@ const useLoginForm = () => {
       setLoading(false);
     }
   };
-  return { form, handleInputChange, handleSubmit, loading, error, success };
+
+  const handleSocialLogin = (provider: string) => {
+    console.log(`Logging in with ${provider}`);
+  };
+
+  return { form, handleInputChange, handleSubmit, handleSocialLogin, loading, error, success };
 };
 
 export default useLoginForm;
