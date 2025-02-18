@@ -85,7 +85,7 @@ const LoginForm: FC = () => {
           </button>
           <button 
             type="button"
-            onClick={() => handleSocialLogin('gitHub')} 
+            onClick={() => handleSocialLogin('github')} 
             className={`${styles.socialButton} ${styles.githubButton}`}
           >
             <FaGithub /> <span>GitHub</span>

@@ -53,11 +53,7 @@ const useLoginForm = () => {
   };
 
   const handleSocialLogin = async (provider: string) => {
-    console.log(provider);
-    console.log("GITHUB_ID:", process.env.GITHUB_CLIENT_ID);
-    console.log("GITHUB_SECRET:", process.env.GITHUB_CLIENT_SECRET);
-
-    signIn("github", { callbackUrl: "/browse" });
+    signIn(provider, { callbackUrl: "/browse" });
   };
 
   return {
