@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/services/authService";
 import { validateLoginForm } from "@/validators/formValidator";
+import { signIn } from "next-auth/react";
 
 interface FormState {
   email: string;
@@ -37,7 +38,7 @@ const useLoginForm = () => {
         setError(result.message);
         return;
       }
-      
+
       setSuccess("User logged in Successfully");
       router.push("/browse");
     } catch (err) {
@@ -51,11 +52,23 @@ const useLoginForm = () => {
     }
   };
 
-  const handleSocialLogin = (provider: string) => {
-    console.log(`Logging in with ${provider}`);
+  const handleSocialLogin = async (provider: string) => {
+    console.log(provider);
+    console.log("GITHUB_ID:", process.env.GITHUB_CLIENT_ID);
+    console.log("GITHUB_SECRET:", process.env.GITHUB_CLIENT_SECRET);
+
+    signIn("github", { callbackUrl: "/browse" });
   };
 
-  return { form, handleInputChange, handleSubmit, handleSocialLogin, loading, error, success };
+  return {
+    form,
+    handleInputChange,
+    handleSubmit,
+    handleSocialLogin,
+    loading,
+    error,
+    success,
+  };
 };
 
 export default useLoginForm;

@@ -1,5 +1,6 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GithubProvider from 'next-auth/providers/github';
 import { PrismaAdapter, baseprisma } from '@/lib/prisma'
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcrypt';
@@ -34,9 +35,25 @@ export const authOptions: NextAuthOptions = {
                 return user;
             },
         }),
+        GithubProvider({
+            clientId: process.env.GITHUB_CLIENT_ID!,
+            clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+        })
     ],
+    debug: true,
+    pages: {
+        signIn: "/auth/login",
+    },
     session: {
         strategy: "jwt" as const,
+    },
+    callbacks: {
+        async signIn({ user, account }) {
+            if (account?.provider === "github") {
+                user.password = null;  
+            }
+            return true;
+        },
     },
     secret: process.env.NEXTAUTH_SECRET,
 };
