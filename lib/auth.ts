@@ -60,26 +60,33 @@ export const authOptions: NextAuthOptions = {
     },
     callbacks: {
         async signIn({ user, account}) {
-            if (account?.provider === "github") {
-                user.password = null;  
-            }
-            // if(account?.provider === 'google'){
-            //     const existingUser = await prisma.user.findUnique({
-            //         where: { email: user.email! },
-            //     })
-
-            //     if(!existingUser){
-            //         await prisma.user.create({
-            //             data: {
-            //                 name: profile?.name,
-            //                 email: user.email!,
-            //                 image: profile?.image,
-            //             },
-            //         })
-            //         return true
-            //     }
-            // }
-            return true;
+            if (account?.provider === "google" || account?.provider === "github") {
+                const existingUser = await prisma.user.findUnique({
+                  where: { email: user.email! },
+                  include: { accounts: true },
+                });
+        
+                if (existingUser) {
+                  const accountExists = existingUser.accounts.some(
+                    (acc) => acc.provider === account.provider
+                  );
+        
+                  if (!accountExists) {
+                    await prisma.account.create({
+                      data: {
+                        userId: existingUser.id,
+                        provider: account.provider,
+                        providerAccountId: account.providerAccountId,
+                        type: account.type,
+                        access_token: account.access_token,
+                        expires_at: account.expires_at,
+                        token_type: account.token_type,
+                      },
+                    });
+                  }
+                }
+              }
+              return true;
         },
     },
     secret: process.env.NEXTAUTH_SECRET,
