@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { FC} from "react";
 import { FaGoogle, FaGithub, FaFacebook } from "react-icons/fa";
 import useLoginForm from "@/hooks/useLoginForm";
 import FormInput from "@/components/ui/FormInput/FormInput";
@@ -48,11 +48,11 @@ const LoginForm: FC = () => {
             <div className={styles.rememberMe}>
               <input
                 type="checkbox"
-                id="rememberMe"
-                name="rememberMe"
+                id="remember"
+                name="remember"
                 onChange={handleInputChange}
               />
-              <label htmlFor="rememberMe">Remember me</label>
+              <label htmlFor="remember">Remember me</label>
             </div>
             <a href="/forgot-password" className={styles.forgotPassword}>Forgot password?</a>
           </div>

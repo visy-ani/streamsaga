@@ -27,10 +27,10 @@ export const signupUser = async (signupData: SignupData) => {
 };
 
 
-//Login
 interface LoginData {
   email: string;
   password: string;
+  remember: boolean;
 }
 
 export const loginUser = async (loginData: LoginData) => {
@@ -39,6 +39,7 @@ export const loginUser = async (loginData: LoginData) => {
       redirect: false,
       email: loginData.email,
       password: loginData.password,
+      remember: loginData.remember,
     });
 
     if (result?.error) {

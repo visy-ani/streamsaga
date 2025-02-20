@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState} from "react";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/services/authService";
 import { validateLoginForm } from "@/validators/formValidator";
@@ -9,18 +9,29 @@ import { signIn } from "next-auth/react";
 interface FormState {
   email: string;
   password: string;
+  remember: boolean;
 }
 
 const useLoginForm = () => {
-  const [form, setForm] = useState<FormState>({ email: "", password: "" });
+  const [form, setForm] = useState<FormState>({
+    email: "",
+    password: "",
+    remember: false,
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const router = useRouter();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, type, checked, value } = e.target;
+
+    setForm((prevForm) => ({
+      ...prevForm,
+      [name]: type === "checkbox" ? checked : value, 
+    }));
   };
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
