@@ -22,7 +22,7 @@ export async function POST(request: Request) {
         );
     }
 
-    const isPassword = await bcrypt.compare(password, user.password);
+    const isPassword = await bcrypt.compare(password, user.password!);
 
     if (!isPassword) {
         return NextResponse.json(
